@@ -33,7 +33,8 @@
     "tona-plugins": "workspace:*",
     "tona-sonner": "workspace:*",
     "tona-ui": "workspace:*",
-    "tona-utils": "workspace:*"
+    "tona-utils": "workspace:*",
+    "ogl": "catalog:"
   },
   "devDependencies": {
     "@preact/preset-vite": "catalog:",
