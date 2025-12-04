@@ -21,7 +21,7 @@ export function FollowButton() {
     <Button
       onClick={onToggleFollow}
       disabled={isPending}
-      className='absolute top-2 right-2 rounded-full shadow-none'
+      className='absolute top-1 right-1 rounded-full shadow-none md:top-2 md:right-2'
       size='sm'
       variant={isFollowed ? 'outline' : 'default'}
     >
