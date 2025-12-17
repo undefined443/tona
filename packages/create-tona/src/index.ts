@@ -35,8 +35,8 @@ Options:
   --interactive / --no-interactive      force interactive / non-interactive mode
 
 Available templates:
-${yellow('js                  JavaScript')}
-${blue('ts                  TypeScript')}`
+${blue('ts                  TypeScript')}
+${yellow('js                  JavaScript')}`
 
 const TEMPLATES = ['js', 'ts']
 
@@ -205,12 +205,12 @@ async function init() {
           : 'Select a template:',
         options: [
           {
-            label: yellow('JavaScript'),
-            value: 'js',
-          },
-          {
             label: blue('TypeScript'),
             value: 'ts',
+          },
+          {
+            label: yellow('JavaScript'),
+            value: 'js',
           },
         ],
       })
