@@ -10,6 +10,7 @@
     "tona": "latest"
   },
   "devDependencies": {
+    "@types/node": "latest",
     "typescript": "~5.9.3",
     "vite": "latest",
     "tona-vite": "latest"
