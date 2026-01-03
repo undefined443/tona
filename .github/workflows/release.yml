@@ -31,13 +31,13 @@ jobs:
         run: pnpm build:pkg
 
       - name: Build geek theme
-        run: pnpm build geek
+        run: pnpm --filter "./themes/geek" build
 
       - name: Build reacg theme
-        run: pnpm build reacg
+        run: pnpm --filter "./themes/reacg" build
 
       - name: Build shadcn theme
-        run: pnpm build shadcn
+        run: pnpm --filter "./themes/shadcn" build
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
