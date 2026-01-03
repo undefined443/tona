@@ -212,7 +212,11 @@ $height-iframe: map.get($md, iframe-height);
 }
 
 pre[class*='language-'].highlighter-prismjs,
-pre code.hljs {
+pre code.hljs,
+pre[class*='language-'] code[class*='language-'],
+.prismjs-engine code[class*='language-'],
+.prismjs-engine pre[class*='language-'],
+.prismjs-engine pre[class*='language-'] code[class*='language-'] {
   border-radius: 2px;
   font-family: $font-code;
 }
