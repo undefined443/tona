@@ -1,4 +1,4 @@
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
 
 .copy-btns::before,
 .custom-comment-avatar::after,
@@ -11,6 +11,6 @@
 .custom-card-title::before,
 [class^='fa-']::before,
 [class^='fa-']::after {
-  font-family: 'Font Awesome 5 free', 'Font Awesome 5 Brands';
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands';
   font-weight: 700;
 }

@@ -4,3 +4,19 @@ pre-commit:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
+
+commit-msg:
+  commands:
+    check:
+      run: |
+        if ! grep -qE '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore)(\(.+\))?:\s.+' {1}; then
+          echo "Error: Commit message does not follow Conventional Commits format"
+          echo "Format: <type>[optional scope]: <description>"
+          echo "Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore"
+          echo ""
+          echo "Examples:"
+          echo "  feat: add user authentication"
+          echo "  fix(api): correct validation logic"
+          echo "  docs: update README"
+          exit 1
+        fi
