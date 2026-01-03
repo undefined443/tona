@@ -35,7 +35,7 @@ function createCard(
             <div class="custom-card-desc">${descText}</div>
             <div class="custom-card-actions">
                 <div>
-                  <i class="fas fa-stream"></i>
+                  <i class="far fa-eye"></i>
                   <span>${viewCount}</span>
                 </div>
                 <div>
