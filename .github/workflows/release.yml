@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build packages
+        run: pnpm build:pkg
+
+      - name: Build geek theme
+        run: pnpm build geek
+
+      - name: Build reacg theme
+        run: pnpm build reacg
+
+      - name: Build shadcn theme
+        run: pnpm build shadcn
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            themes/geek/dist/*.js
+            themes/reacg/dist/*.js
+            themes/shadcn/dist/*.js
+          generate_release_notes: true
+          draft: false
+          prerelease: false
