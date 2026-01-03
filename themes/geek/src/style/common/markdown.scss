@@ -214,6 +214,7 @@ $height-iframe: map.get($md, iframe-height);
 pre[class*='language-'].highlighter-prismjs,
 pre code.hljs {
   border-radius: 2px;
+  font-family: $font-code;
 }
 
 // code toolbar
