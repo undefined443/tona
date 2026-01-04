@@ -73,13 +73,13 @@ function removeHeaderToLeftSidebar() {
       allowVisit: true,
     },
     {
-      icon: 'fa-home',
+      icon: 'fa-house',
       title: '首页',
       url: index,
       allowVisit: true,
     },
     {
-      icon: 'fa-pen-square',
+      icon: 'fa-pen-to-square',
       title: '新随笔',
       url: newPost,
       allowVisit: true,
@@ -103,7 +103,7 @@ function removeHeaderToLeftSidebar() {
       allowVisit: true,
     },
     {
-      icon: 'fa-cog',
+      icon: 'fa-gear',
       title: '管理',
       url: admin,
       allowVisit: false,
@@ -116,7 +116,7 @@ function removeHeaderToLeftSidebar() {
     const target = title === '首页' ? '_self' : '_blank'
     const item = $(`<a href="${url}" target="${target}">
             <li>
-                <span class="fas fa-fw ${icon}"></span>
+                <span class="fa-solid fa-fw ${icon}"></span>
                 <span class="nav-item-text">${title}</span>
             </li>
         </a>`)

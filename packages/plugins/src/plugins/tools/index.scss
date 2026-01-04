@@ -38,6 +38,8 @@ $color: map.get($toolMenu, color);
   i {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100%;
     font-style: normal;
     outline: none;
     &::before {

@@ -35,15 +35,15 @@ function createCard(
             <div class="custom-card-desc">${descText}</div>
             <div class="custom-card-actions">
                 <div>
-                  <i class="far fa-eye"></i>
+                  <i class="fa-regular fa-eye"></i>
                   <span>${viewCount}</span>
                 </div>
                 <div>
-                  <i class="far fa-comment-dots"></i>
+                  <i class="fa-regular fa-comment-dots"></i>
                   <span>${commentCount}</span>
                 </div>
                 <div>
-                  <i class="far fa-thumbs-up"></i>
+                  <i class="fa-regular fa-thumbs-up"></i>
                   <span>${diggCount}</span>
                 </div>
                 ${editButton}

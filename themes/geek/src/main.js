@@ -71,33 +71,33 @@ createTheme()
     { enable: true },
     {
       menuIconType: 'className',
-      menuIcon: 'fa-angle-up',
-      menuActiveIcon: 'fa-angle-down',
+      menuIcon: 'fa-solid fa-angle-up',
+      menuActiveIcon: 'fa-solid fa-angle-down',
       scrollContainer: '#mainContent',
       toolbarItems: [
         {
-          icon: 'fas fa-rocket rocket-rotate',
+          icon: 'fa-solid fa-rocket rocket-rotate',
           iconType: 'className',
         },
         {
           enable: true,
-          icon: 'fa-moon',
+          icon: 'fa-solid fa-moon',
           iconType: 'className',
         },
         {
-          icon: 'fa-thumbs-up',
+          icon: 'fa-solid fa-thumbs-up',
           iconType: 'className',
         },
         {
-          icon: 'fa-heart',
+          icon: 'fa-solid fa-heart',
           iconType: 'className',
         },
         {
-          icon: 'fa-star',
+          icon: 'fa-solid fa-star',
           iconType: 'className',
         },
         {
-          icon: 'fa-comment-dots',
+          icon: 'fa-solid fa-comment-dots',
           iconType: 'className',
         },
       ],

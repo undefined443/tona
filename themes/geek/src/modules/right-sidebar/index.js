@@ -19,12 +19,12 @@ function buildTopBtns() {
     <div class="account">
         <div class="account-button email">
             <a href="${contact}" target="_bank">
-                <li class="fas fa-envelope"></li>
+                <li class="fa-solid fa-envelope"></li>
             </a>
         </div>
         <div class="account-button message">
             <a href="${message}" class='account-button-notice'>
-                <li class="fas fa-bell"></li>
+                <li class="fa-solid fa-bell"></li>
                 <span class="notice-count" ${
                   !noticeCount && 'style=display:none'
                 }>${noticeCount}</span>
@@ -32,7 +32,7 @@ function buildTopBtns() {
         </div>
         <div class="account-button stats">
             <div class="account-button-stats">
-                <li class="fas fa-chart-bar"></li>
+                <li class="fa-solid fa-chart-bar"></li>
             </div>
         </div>
     </div>`
@@ -45,7 +45,7 @@ function buildGithubIcon() {
     return
   }
   const el = `<div class="account-avatar">
-                <a href="${url}"><i class="fab fa-github"></i></a>
+                <a href="${url}"><i class="fa-brands fa-github"></i></a>
               </div>`
   $('.account').append(el)
 }

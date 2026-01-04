@@ -43,7 +43,7 @@ function buildNextPrevPost() {
             .append(
               $('<span>').text(typeMap.extraText),
               $('<span>').text(data.title),
-              $('<li>').addClass(`fas ${typeMap.icon}`),
+              $('<li>').addClass(`fa-solid ${typeMap.icon}`),
             )
             .attr('href', data.url),
         )

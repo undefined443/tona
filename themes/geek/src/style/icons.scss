@@ -8,9 +8,7 @@
 .buryit::before,
 #green_channel_favorite::before,
 #green_channel_follow::before,
-.custom-card-title::before,
-[class^='fa-']::before,
-[class^='fa-']::after {
-  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands';
-  font-weight: 700;
+.custom-card-title::before {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
 }

@@ -2,7 +2,7 @@
 
 $iconsColor: #0984e3 #00d1b2 #ff6b81 #10ac84 #ffd257 #00d1b2 #48c774;
 
-#left-side .fas {
+#left-side .fa-solid {
   margin-right: 8px;
 }
 
@@ -140,7 +140,7 @@ $iconsColor: #0984e3 #00d1b2 #ff6b81 #10ac84 #ffd257 #00d1b2 #48c774;
 
 @media screen and (max-width: 1366px) {
   #cnblog-nav {
-    .fas {
+    .fa-solid {
       font-size: 22px;
       margin-right: 0;
     }
