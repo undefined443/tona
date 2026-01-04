@@ -150,6 +150,37 @@
 }
 
 @media screen and (max-width: 768px) {
+  .profile {
+    position: relative;
+    width: 100%;
+    margin: 0 0 12px 0;
+    background-color: var(--geek-color-1);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .profile-blur {
+    display: none;
+  }
+
+  .profile-menu {
+    padding-left: 0;
+    background-color: var(--geek-color-1);
+    border-radius: 0 0 8px 8px;
+  }
+
+  .profile-banner {
+    min-height: 180px;
+    border-radius: 8px 8px 0 0;
+
+    .profile-signature {
+      max-width: 80%;
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+
   .profile-avatar {
     left: 10px;
     bottom: 50px;
@@ -163,13 +194,6 @@
   .profile-msg {
     left: 83px;
     bottom: 51px;
-  }
-
-  .profile-banner {
-    .profile-signature {
-      max-width: 80%;
-      font-size: 14px;
-    }
   }
 }
 
