@@ -67,14 +67,12 @@ export function createDarkModeButton(
     icon: icon || DEFAULT_ICONS.dark,
     iconType,
     tooltip: tooltip || DEFAULT_TOOLTIPS.dark,
-    // className 固定：darkMode 核心的 updateModeButton/watchModeButton 硬编码
-    // '.mode-change' 选择器，覆盖会静默破坏图标同步并泄漏 MutationObserver
+    // The mode synchronization uses the fixed '.mode-change' selector.
     ...buttonOptions,
     className: 'mode-change',
     /**
      * 初始化模式状态：localStorage.modeType 有值时恢复对应模式；无值时按
      * darkDefault/followSystem 默认逻辑进入浅色/深色；并初始化按钮图标/tooltip
-     * （按钮尚未渲染时由核心逻辑的 MutationObserver 兜底同步）
      * @param {object} theme 主题实例
      * @param {object} pluginOptions 工具插件配置
      */

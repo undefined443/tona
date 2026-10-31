@@ -125,6 +125,8 @@ theme.use(darkMode, {
 
 The `.mode-change` button in the toolbar cycles through the three modes (dark → light → follow system), and the selection is persisted to `localStorage.modeType`. In follow-system mode, the page listens to the OS `prefers-color-scheme` changes and switches in real time.
 
+When creating a custom `.mode-change` toolbar item after the plugin initializes, use `setup: updateModeButton` (imported from `tona-plugins`) to synchronize its initial icon and tooltip. The `createDarkModeButton` factory handles its own initialization.
+
 Button icons and tooltips are customizable:
 
 ```typescript

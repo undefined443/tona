@@ -8,10 +8,10 @@ import {
   commentsAvatars,
   createBackTopButton,
   createCommentButton,
-  createDarkModeButton,
   createFavoriteButton,
   createFollowButton,
   createLikeButton,
+  darkMode,
   emoji,
   imagePreview,
   license,
@@ -21,6 +21,7 @@ import {
   postMessage,
   signature,
   tools,
+  updateModeButton,
   webTag,
 } from 'tona-plugins'
 import { createSidebarToggleToolbarItem } from './modules/sidebar-toggle'
@@ -47,6 +48,15 @@ createTheme()
   .use(webTag, { enable: true })
   .use(musicPlayer, { enable: false })
   .use(live2d, { enable: false })
+  .use(darkMode, {
+    enable: true,
+    followSystem: true,
+    icons: {
+      dark: 'fa-solid fa-moon',
+      light: 'fa-solid fa-sun',
+      system: 'fa-solid fa-circle-half-stroke',
+    },
+  })
   .use(notice, { enable: false })
   .use(postMessage, { enable: true })
   .use(
@@ -92,7 +102,13 @@ createTheme()
           iconType: 'className',
         }),
         // darkMode 按钮用默认三态图标（深色 fa-moon / 浅色 fa-sun / 跟随系统 fa-adjust）
-        createDarkModeButton({ iconType: 'className' }),
+        {
+          enable: true,
+          icon: 'fa-adjust',
+          iconType: 'className',
+          className: 'mode-change',
+          setup: updateModeButton,
+        },
         createLikeButton({ icon: 'fa-thumbs-up', iconType: 'className' }),
         createFollowButton({ icon: 'fa-heart', iconType: 'className' }),
         createFavoriteButton({ icon: 'fa-star', iconType: 'className' }),

@@ -78,14 +78,48 @@ describe('darkMode 集成：跟随系统 tooltip 同步', () => {
             icon: 'fa-moon',
             iconType: 'className',
             className: 'mode-change',
+            setup: plugins.updateModeButton,
           },
           { icon: 'fa-thumbs-up', iconType: 'className' },
         ],
       },
     )
-    // 等 MutationObserver 兜底回调触发
-    await new Promise((r) => setTimeout(r, 100))
   }
+
+  it('initializes dark mode without observing when the toolbar is disabled', async () => {
+    const { vi } = await import('vite-plus/test')
+    vi.resetModules()
+    localStorage.setItem('modeType', 'dark')
+    const observe = vi.spyOn(window.MutationObserver.prototype, 'observe')
+    const { createTheme } = await import('tona')
+    const { darkMode } = await import('tona-plugins')
+
+    createTheme().use(darkMode, {
+      enable: true,
+      followSystem: true,
+    })
+    expect(document.documentElement.getAttribute('theme')).toBe('dark')
+    expect(document.querySelector('.custom-toolbar')).toBeNull()
+    expect(observe).not.toHaveBeenCalled()
+    observe.mockRestore()
+  })
+
+  it('synchronizes a toolbar button created before dark mode initialization', async () => {
+    const { vi } = await import('vite-plus/test')
+    vi.resetModules()
+    const { createTheme } = await import('tona')
+    const { darkMode, tools } = await import('tona-plugins')
+    createTheme()
+      .use(tools, { enable: true }, {
+        toolbarItems: [
+          { className: 'mode-change', icon: 'fa-adjust', iconType: 'className' },
+        ],
+      })
+      .use(darkMode, { enable: true, followSystem: true })
+    expect(document.querySelector('.mode-change .tooltip')?.textContent).toBe(
+      '跟随系统',
+    )
+  })
 
   it('darkMode 先于 tools 注册时，跟随系统模式 tooltip 正确同步', async () => {
     await useGeekTheme({ enable: true, followSystem: true })

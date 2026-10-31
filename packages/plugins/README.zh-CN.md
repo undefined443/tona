@@ -125,6 +125,8 @@ theme.use(darkMode, {
 
 工具栏的 `.mode-change` 按钮会在三种模式间循环切换（深色 → 浅色 → 跟随系统），选择会持久化到 `localStorage.modeType`。跟随系统模式下，页面会监听操作系统 `prefers-color-scheme` 的变化并实时切换。
 
+如果在插件初始化后创建自定义 `.mode-change` 工具栏按钮，请从 `tona-plugins` 导入 `updateModeButton`，并设置 `setup: updateModeButton`，以同步按钮的初始图标和提示。`createDarkModeButton` 工厂会自行初始化。
+
 按钮图标与提示文字支持自定义：
 
 ```typescript
