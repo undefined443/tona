@@ -1,4 +1,4 @@
-import { getGithubOptions, getLinksOptions } from 'tona-options'
+import { getLinksOptions } from 'tona-options'
 import type { Link } from 'tona-plugins'
 import {
   admin,
@@ -9,8 +9,7 @@ import {
   rss,
   send,
 } from '../../constants/links'
-import { avatar } from '../../constants/cnblog'
-import { getBlogName, isOwner } from '../../utils/cnblog'
+import { isOwner } from '../../utils/cnblog'
 import './index.scss'
 
 function buildLeftSidebarContainer() {
@@ -224,25 +223,6 @@ function removeHeaderToLeftSidebar(links: Link[]) {
   }
 }
 
-function buildLeftsideBottomBtns() {
-  const { enable, url } = getGithubOptions()
-  if (!enable) {
-    return
-  }
-  const userName = getBlogName()
-  const el = `
-    <div class="leftside-bottom">
-      <a href="${url}" class="follow-me" target="_blank">
-        <span class="follow-text"><i class="fa-brands fa-github"></i><span>Fork me on GitHub</span></span>
-        <span class="developer">
-          <img src="${avatar}">
-          <span>${userName}</span>
-        </span>
-      </a>
-    </div>`
-  $('#left-side').append(el)
-}
-
 export function install() {
   buildLeftSidebarContainer()
   buildLogo()
@@ -252,5 +232,4 @@ export function install() {
 
   buildCustomLinks(links)
   removeHeaderToLeftSidebar(links)
-  buildLeftsideBottomBtns()
 }

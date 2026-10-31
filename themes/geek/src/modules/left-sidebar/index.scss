@@ -132,10 +132,6 @@ $iconsColor: #0984e3 #00d1b2 #ff6b81 #10ac84 #ffd257 #00d1b2 #48c774;
   }
 }
 
-.left-sidebar_bottom {
-  margin-top: auto;
-}
-
 .links {
   overflow-y: auto;
 
@@ -143,56 +139,6 @@ $iconsColor: #0984e3 #00d1b2 #ff6b81 #10ac84 #ffd257 #00d1b2 #48c774;
     position: sticky;
     top: 0;
     background-color: var(--geek-color-1);
-  }
-}
-
-.follow-me {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  font-size: 14px;
-  overflow: hidden;
-  color: #9c9cab;
-  padding: 0 20px;
-  height: 52px;
-  border-top: 1px solid var(--border-sidebar-block);
-  position: relative;
-
-  .follow-text {
-    display: flex;
-    align-items: center;
-    transition: 0.3s;
-  }
-
-  .developer {
-    position: absolute;
-    left: 0;
-    top: -100%;
-    display: flex;
-    transition: 0.3s;
-    padding: 0 20px;
-    align-items: center;
-    background-color: var(--geek-color-1);
-    width: 100%;
-    height: 100%;
-
-    img {
-      border-radius: 50%;
-      width: 26px;
-      height: 26px;
-      object-fit: cover;
-      margin-right: 10px;
-    }
-  }
-
-  &:hover {
-    .follow-text {
-      transform: translateY(100%);
-    }
-
-    .developer {
-      top: 0;
-    }
   }
 }
 
@@ -258,9 +204,7 @@ $iconsColor: #0984e3 #00d1b2 #ff6b81 #10ac84 #ffd257 #00d1b2 #48c774;
   }
 
   .logo,
-  .links,
-  .developer span,
-  .follow-text span {
+  .links {
     display: none;
   }
 }
