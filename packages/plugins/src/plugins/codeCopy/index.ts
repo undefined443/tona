@@ -20,16 +20,18 @@ function createCopyButtons() {
  */
 function handleCopyCode(code: string, btn: JQuery<HTMLElement>) {
   copyToClipboard(code)
-    .then(() => {
-      toast('复制成功')
-      btn.text('复制成功')
-      setTimeout(() => {
-        btn.text('复制代码')
-      }, 1500)
-    })
-    .catch(() => {
-      btn.text('复制失败')
-    })
+    .then(
+      () => {
+        btn.text('复制成功')
+        setTimeout(() => {
+          btn.text('复制代码')
+        }, 1500)
+        toast('复制成功')
+      },
+      () => {
+        btn.text('复制失败')
+      },
+    )
 }
 
 /**

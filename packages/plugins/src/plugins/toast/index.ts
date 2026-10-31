@@ -39,29 +39,5 @@ export function toast(
     ],
   } as unknown as ConstructorParameters<typeof Notyf>[0])
 
-  if (type === 'info') {
-    notyf.open({
-      type,
-      message,
-      duration,
-      icon: false,
-    })
-  } else {
-    // notyf 类型声明仅含 success/error；info/warning 为构造函数按 types 配置
-    // 动态注册的方法，运行时存在，此处按运行时形态断言
-    const method = (
-      notyf as unknown as Record<ToastType, (payload: NotyfPayload) => unknown>
-    )[type]
-    method({
-      message,
-      duration,
-      icon: false,
-    })
-  }
-}
-
-interface NotyfPayload {
-  message: string
-  duration?: number
-  icon: false
+  notyf.open({ type, message, duration, icon: false })
 }
