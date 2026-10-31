@@ -199,7 +199,9 @@ $height-iframe: map.get($md, iframe-height);
 
 // singleline code
 .cnblogs-markdown :not(pre, div, td) > code,
-.blogpost-body :not(pre, div, td) > code {
+.blogpost-body :not(pre, div, td) > code,
+.cnblogs-markdown td > code:not(pre code, .cnblogs_Highlighter code, .syntaxhighlighter code),
+.blogpost-body td > code:not(pre code, .cnblogs_Highlighter code, .syntaxhighlighter code) {
   display: inline;
   padding: 0.065em 0.4em;
   background-color: $color-singlelinecode-bg;
