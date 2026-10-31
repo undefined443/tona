@@ -1,5 +1,3 @@
-@import 'tona-plugins/codeTrafficLight/index.css';
-@import 'tona-plugins/codeHighlight/index.css';
 @import 'tona-plugins/codeLinenumbers/index.css';
 @import 'tona-plugins/codeCopy/index.css';
 @import 'tona-plugins/codeLang/index.css';
@@ -12,7 +10,6 @@
 @import 'tona-plugins/license/index.css';
 @import 'tona-plugins/tools/index.css';
 @import 'tona-plugins/darkMode/index.css';
-@import 'tona-plugins/clickEffects/index.css';
 @import 'tona-plugins/musicPlayer/index.css';
 
 :root {
