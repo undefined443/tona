@@ -3,7 +3,6 @@ import {
   background,
   catalog,
   clickEffects,
-  codeCopy,
   colorMode,
   commentsAvatars,
   createBackTopButton,
@@ -39,7 +38,6 @@ Object.values(
 
 createTheme()
   .use(clickEffects, { enable: false })
-  .use(codeCopy, { enable: true })
   .use(commentsAvatars, { enable: true })
   .use(colorMode, { enable: true, color: '#2F63FF' })
   .use(emoji, { enable: true })
