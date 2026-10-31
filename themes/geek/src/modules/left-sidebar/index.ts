@@ -233,7 +233,7 @@ function buildLeftsideBottomBtns() {
   const el = `
     <div class="leftside-bottom">
       <a href="${url}" class="follow-me" target="_blank">
-        <span class="follow-text"><i class="fas fa-github"></i><span>Fork me on GitHub</span></span>
+        <span class="follow-text"><i class="fa-brands fa-github"></i><span>Fork me on GitHub</span></span>
         <span class="developer">
           <img src="${avatar}">
           <span>${userName}</span>
