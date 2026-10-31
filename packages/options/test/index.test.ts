@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vite-plus/test'
 import {
   getBackgroundOptions,
   getBarragesOptions,
@@ -447,6 +447,44 @@ describe('Options 配置测试', () => {
         ],
       })
     })
+
+    it('应该兼容旧版数组配置并统一为最新格式', () => {
+      window.opts = {
+        links: [
+          { name: 'GitHub', link: 'https://github.com' },
+          { name: 'Blog', link: 'https://blog.com' },
+        ],
+      }
+
+      const options = getLinksOptions()
+
+      expect(options).toEqual({
+        enable: true,
+        value: [
+          { name: 'GitHub', link: 'https://github.com' },
+          { name: 'Blog', link: 'https://blog.com' },
+        ],
+      })
+    })
+
+    it('应该兼容旧版键值为对象的配置', () => {
+      window.opts = {
+        links: {
+          0: { name: 'GitHub', link: 'https://github.com' },
+          1: { name: 'Blog', link: 'https://blog.com' },
+        },
+      }
+
+      const options = getLinksOptions()
+
+      expect(options).toEqual({
+        enable: true,
+        value: [
+          { name: 'GitHub', link: 'https://github.com' },
+          { name: 'Blog', link: 'https://blog.com' },
+        ],
+      })
+    })
   })
 
   describe('图片预览配置测试', () => {
@@ -486,6 +524,7 @@ describe('Options 配置测试', () => {
         height: 200,
         position: 'left',
         gap: 'default',
+        mute: false,
       })
     })
 
@@ -510,6 +549,29 @@ describe('Options 配置测试', () => {
         height: 200,
         position: 'left',
         gap: 'default',
+        mute: false,
+      })
+    })
+
+    it('应该合并用户静音配置', () => {
+      window.opts = {
+        live2d: {
+          mute: true,
+        },
+      }
+
+      const options = getLive2dOptions()
+
+      expect(options).toEqual({
+        enable: false,
+        page: 'all',
+        agent: 'pc',
+        model: 'haru-01',
+        width: 150,
+        height: 200,
+        position: 'left',
+        gap: 'default',
+        mute: true,
       })
     })
   })
@@ -551,8 +613,7 @@ describe('Options 配置测试', () => {
       expect(options).toEqual({
         enable: false,
         darkDefault: false,
-        autoDark: false,
-        autoLight: false,
+        followSystem: false,
       })
     })
 
@@ -569,8 +630,24 @@ describe('Options 配置测试', () => {
       expect(options).toEqual({
         enable: true,
         darkDefault: true,
-        autoDark: false,
-        autoLight: false,
+        followSystem: false,
+      })
+    })
+
+    it('应该支持跟随系统模式配置', () => {
+      window.opts = {
+        mode: {
+          enable: true,
+          followSystem: true,
+        },
+      }
+
+      const options = getDarkModeOptions()
+
+      expect(options).toEqual({
+        enable: true,
+        darkDefault: false,
+        followSystem: true,
       })
     })
   })
@@ -590,8 +667,8 @@ describe('Options 配置测试', () => {
         color: '',
       })
       expect(options.audio).toHaveLength(1)
-      expect(options.audio[0]).toHaveProperty('name', '404 not found')
-      expect(options.audio[0]).toHaveProperty('artist', 'REOL')
+      expect(options.audio[0]).toHaveProperty('name', '')
+      expect(options.audio[0]).toHaveProperty('artist', '')
     })
 
     it('应该合并用户音乐播放器配置', () => {

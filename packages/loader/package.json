@@ -1,26 +1,27 @@
 {
   "name": "tona-loader",
-  "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.25",
   "description": "Loading theme js file",
-  "author": "",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://hub.fastgit.org/guangzan/loader.git"
-  },
   "keywords": [
     "博客园",
     "皮肤"
   ],
+  "license": "ISC",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guangzan/tona.git",
+    "directory": "packages/loader"
+  },
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "tsdown",
-    "dev": "tsdown --watch"
+    "build": "vp pack",
+    "dev": "vp pack --watch"
   },
   "devDependencies": {
     "@types/jquery": "catalog:",
-    "tsdown": "catalog:",
+    "vite-plus": "catalog:",
     "vitest": "catalog:"
   }
 }

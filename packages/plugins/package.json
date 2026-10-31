@@ -1,39 +1,43 @@
 {
   "name": "tona-plugins",
-  "version": "1.0.0",
+  "version": "1.0.25",
   "description": "",
-  "author": {
-    "name": "guangzan",
-    "url": "https://www.cnblogs.com/guangzan",
-    "email": "guangzan1999@outlook.com"
-  },
-  "license": "MIT",
-  "homepage": "https://github.com/acnblogs/tona#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/acnblogs/tona.git"
-  },
-  "bugs": {
-    "url": "https://github.com/acnblogs/tona/issues"
-  },
   "keywords": [
     "博客园"
   ],
+  "homepage": "https://github.com/guangzan/tona/tree/main/packages/plugins#readme",
+  "bugs": {
+    "url": "https://github.com/guangzan/tona/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "guangzan",
+    "email": "guangzan1999@outlook.com",
+    "url": "https://www.cnblogs.com/guangzan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guangzan/tona.git",
+    "directory": "packages/plugins"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./src/index.js"
-    }
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./*": "./dist/*"
   },
-  "main": "./src/index.js",
-  "module": "./src/index.js",
-  "types": "./index.d.ts",
-  "files": [
-    "index.d.ts",
-    "src"
-  ],
   "scripts": {
-    "dev": "vite"
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "dev:example": "vp dev"
   },
   "dependencies": {
     "notyf": "catalog:",
@@ -41,11 +45,13 @@
     "tona-options": "workspace:*"
   },
   "devDependencies": {
+    "@types/jquery": "catalog:",
     "@types/node": "catalog:",
     "sass": "catalog:",
     "tona-vite": "workspace:*",
     "vite": "catalog:",
     "vite-plugin-html": "catalog:",
-    "vite-plugin-singlefile": "catalog:"
+    "vite-plugin-singlefile": "catalog:",
+    "vite-plus": "catalog:"
   }
 }

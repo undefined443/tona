@@ -2,7 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import type { LibraryFormats, Plugin, UserConfig, ViteDevServer } from 'vite'
+import type {
+  ConfigEnv,
+  LibraryFormats,
+  Plugin,
+  UserConfig,
+  ViteDevServer,
+} from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -16,13 +22,28 @@ export interface TonaPluginOptions {
    * @default 'theme'
    */
   themeName?: string
+  /**
+   * When true, emit Inline CSS Dist (CSS injected into the IIFE JS).
+   * @default false
+   */
+  inlineCss?: boolean
+  /**
+   * When true, include a content hash in the JS filename.
+   * @default false
+   */
+  hash?: boolean
+  /**
+   * When true, emit a sourcemap alongside the build output.
+   * @default false
+   */
+  sourcemap?: boolean
 }
 
 /**
  * Vite plugin for Tona themes - combines dynamic script extension and shared assets serving
  */
 export default function tona(options: TonaPluginOptions = {}): Plugin {
-  const { themeName = 'theme' } = options
+  const { themeName = 'theme', inlineCss = false, hash = false, sourcemap = false } = options
 
   // Default path to shared assets
   const assetsPath = path.join(__dirname, '..', 'public')
@@ -31,7 +52,7 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
   return {
     name: 'vite-plugin-tona',
 
-    config(config: UserConfig): UserConfig {
+    config(config: UserConfig, env: ConfigEnv): UserConfig {
       // Check main.ts first, then main.js
       const tsPath = path.resolve(baseDir, 'src/main.ts')
       const jsPath = path.resolve(baseDir, 'src/main.js')
@@ -47,33 +68,75 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
         return config
       }
 
+      const jsFileName = hash
+        ? () => `${themeName}.[hash].js`
+        : () => `${themeName}.min.js`
+
       const existingLib = config.build?.lib
       const libConfig =
         existingLib && typeof existingLib === 'object'
           ? {
-              ...existingLib,
-              formats: existingLib.formats || (['iife'] as LibraryFormats[]),
-              entry: existingLib.entry || resolvedEntryPath,
-              name: existingLib.name || themeName,
-              fileName: existingLib.fileName || (() => `${themeName}.min.js`),
-              cssFileName: existingLib.cssFileName || `${themeName}.min`, // 不能包含 .css  后缀，会自动生成，否则变成 .css.css
-            }
+            ...existingLib,
+            formats: existingLib.formats || (['iife'] as LibraryFormats[]),
+            entry: existingLib.entry || resolvedEntryPath,
+            name: existingLib.name || themeName,
+            fileName: existingLib.fileName || jsFileName,
+            ...(inlineCss
+              ? {}
+              : {
+                cssFileName:
+                  existingLib.cssFileName || `${themeName}.min`,
+              }),
+          }
           : {
-              formats: ['iife'] as LibraryFormats[],
-              entry: resolvedEntryPath,
-              name: themeName,
-              fileName: () => `${themeName}.min.js`,
-              cssFileName: `${themeName}.min`, // 不能包含 .css  后缀，会自动生成，否则变成 .css.css
-            }
+            formats: ['iife'] as LibraryFormats[],
+            entry: resolvedEntryPath,
+            name: themeName,
+            fileName: jsFileName,
+            ...(inlineCss ? {} : { cssFileName: `${themeName}.min` }),
+          }
 
-      return {
-        ...config,
+      const buildConfig = config.build ?? {}
+      const bundlerOptions =
+        buildConfig.rolldownOptions ?? buildConfig.rollupOptions
+
+      const result: UserConfig = {
+        css: {
+          preprocessorOptions: {
+            scss: {
+              ...config.css?.preprocessorOptions?.scss,
+              charset: config.css?.preprocessorOptions?.scss?.charset ?? false,
+            },
+          },
+        },
         build: {
-          ...config.build,
-          cssCodeSplit: config.build?.cssCodeSplit ?? false,
+          cssCodeSplit: buildConfig.cssCodeSplit ?? inlineCss,
           lib: libConfig,
+          sourcemap,
+          ...(bundlerOptions ? { rolldownOptions: bundlerOptions } : {}),
         },
       }
+
+      // Dev only: point the dependency scanner at the theme entry so all
+      // node_modules deps are pre-bundled at cold start, instead of being
+      // discovered at runtime ("new dependencies optimized" + full reload).
+      // Theme dirs have no index.html for the scanner to crawl.
+      if (env.command === 'serve') {
+        // Respect explicit user entries — merge would replace arrays.
+        const userEntries = config.optimizeDeps?.entries
+        if (userEntries == null) {
+          const relativeEntry = path
+            .relative(config.root ?? process.cwd(), resolvedEntryPath)
+            .split(path.sep)
+            .join('/')
+          result.optimizeDeps = {
+            ...config.optimizeDeps,
+            entries: [relativeEntry],
+          }
+        }
+      }
+
+      return result
     },
 
     transformIndexHtml(html) {

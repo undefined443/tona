@@ -1,30 +1,59 @@
-# Tona
+# tona
 
-API for creating cnblog theme.
+<p align="center">
+  <img src="../../assets/tona.png" alt="Tona" width="100" />
+</p>
 
-## Install
+<p align="center">
+  A modern theme development framework for CNBlogs (博客园).
+</p>
 
-```shell
-npm i tona
+<p align="center">
+  <a href="https://www.npmjs.com/package/tona"><img src="https://img.shields.io/npm/v/tona?style=flat-square" alt="npm version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/npm/l/tona?style=flat-square" alt="license"></a>
+  <a href="https://www.cnblogs.com"><img src="https://img.shields.io/badge/CNBlogs-博客园-green?style=flat-square" alt="CNBlogs"></a>
+</p>
+
+**English** | [中文](./README.zh-CN.md)
+
+## Features
+
+- **Plugin System** - Extensible plugin architecture for building modular themes
+- **Configuration API** - Type-safe configuration management with `defineOptions`
+- **Theme Context** - Shared theme state and utilities via `createTheme`
+- **TypeScript Support** - Full TypeScript definitions included
+- **Lightweight** - Minimal runtime overhead
+
+## Installation
+
+```bash
+npm install tona
 ```
 
-## API
+```bash
+pnpm add tona
+```
 
-### createTheme
+```bash
+yarn add tona
+```
 
-Returns a theme instance that provides a theme context.
+## Usage
 
-```js
+### Creating a Theme
+
+```typescript
 import { createTheme } from 'tona'
 
 const theme = createTheme()
+
+// Use plugins
+theme.use(myPlugin)
 ```
 
-### defineOptions
+### Defining Options
 
-Returns a generic configuration object.
-
-```js
+```typescript
 import { defineOptions } from 'tona'
 
 const getBackgroundOptions = defineOptions('bodyBackground', {
@@ -33,38 +62,14 @@ const getBackgroundOptions = defineOptions('bodyBackground', {
   opacity: 0.85,
   repeat: false,
 })
+
+// Use in your theme
+const options = getBackgroundOptions(userConfig)
 ```
 
-Cnblog theme users can add the following configuration:
+### Creating a Plugin
 
-```js
-const opts = {
-  bodyBackground: {
-    enable: false,
-    value: '',
-    opacity: 0.85,
-    repeat: false,
-  },
-}
-```
-
-Using configuration aliases:
-
-```javascript
-import { defineOptions } from 'tona'
-
-const getBackgroundOptions = defineOptions(['bodyBackground', 'background'], {
-  enable: false,
-  value: '',
-  opacity: 0.85,
-  repeat: false,
-})
-```
-
-## Plugin System
-
-```js
-// plugin.js
+```typescript
 import { defineOptions } from 'tona'
 
 export function backgroundPlugin(theme, devOptions, pluginOptions) {
@@ -77,15 +82,12 @@ export function backgroundPlugin(theme, devOptions, pluginOptions) {
 
   const { enable, value, opacity, repeat } = getBackgroundOptions(devOptions)
 
-  if (!enable)
-    return
+  if (!enable) return
 
   const { opacitySelector } = Object.assign(
     {},
-    {
-      opacitySelector: '#main,#navigator',
-    },
-    pluginOptions
+    { opacitySelector: '#main,#navigator' },
+    pluginOptions,
   )
 
   setBackground(value, repeat)
@@ -93,8 +95,9 @@ export function backgroundPlugin(theme, devOptions, pluginOptions) {
 }
 ```
 
-```js
-// theme/index.js
+### Using Plugins
+
+```typescript
 import { createTheme } from 'tona'
 import { backgroundPlugin } from './plugin'
 
@@ -103,14 +106,44 @@ const theme = createTheme()
 theme.use(
   backgroundPlugin,
   {
-    // Set the default configuration of the theme
+    // Theme default configuration
     enable: true,
     value: '#ffb3cc',
     opacity: 0.85,
   },
   {
-    // Set the default configuration of the plugin
+    // Plugin configuration
     opacitySelector: '#main',
-  }
+  },
 )
 ```
+
+## API Reference
+
+### `createTheme()`
+
+Creates a new theme instance with context management.
+
+**Returns:** `ThemeInstance`
+
+### `defineOptions(key, defaults)`
+
+Creates a type-safe configuration getter.
+
+**Parameters:**
+
+- `key` - Configuration key or array of keys (for aliases)
+- `defaults` - Default configuration object
+
+**Returns:** `(options: any) => Config`
+
+## Related Packages
+
+- [tona-plugins](https://github.com/guangzan/tona/tree/main/packages/plugins) - Official plugin collection
+- [tona-hooks](https://github.com/guangzan/tona/tree/main/packages/hooks) - React hooks for theme development
+- [tona-utils](https://github.com/guangzan/tona/tree/main/packages/utils) - Utility functions
+- [tona-vite](https://github.com/guangzan/tona/tree/main/packages/tona-vite) - Vite plugin for theme development
+
+## Documentation
+
+For detailed documentation and examples, visit the [Tona documentation](https://github.com/guangzan/tona).

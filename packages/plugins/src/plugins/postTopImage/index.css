@@ -1,0 +1,22 @@
+:root {
+  --post-topimage-height: 400px;
+}
+
+#custom-post-topimage {
+  width: 100%;
+  height: var(--post-topimage-height);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+
+#custom-post-topimage:hover {
+  cursor: zoom-in;
+}
+
+@media screen and (max-width: 767px) {
+  #custom-post-topimage {
+    height: 184px;
+  }
+}

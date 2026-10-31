@@ -1,81 +1,118 @@
 # tona-ui
 
-Tona UI 组件库，提供可复用的 Preact 组件。
+<p align="center">
+  <img src="../../assets/tona.png" alt="Tona" width="100" />
+</p>
 
-## 安装
+<p align="center">
+  UI component library for Tona themes, built with Preact.
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/tona-ui"><img src="https://img.shields.io/npm/v/tona-ui?style=flat-square" alt="npm version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/npm/l/tona-ui?style=flat-square" alt="license"></a>
+  <a href="https://preactjs.com"><img src="https://img.shields.io/badge/Preact->=10.0.0-673AB8?style=flat-square&logo=preact" alt="Preact"></a>
+</p>
+
+**English** | [中文](./README.zh-CN.md)
+
+## Features
+
+- **Preact Based** - Lightweight components for Preact
+- **Slot Component** - Radix UI-inspired Slot for prop forwarding
+- **Utility Functions** - `cn()` for class name merging
+- **TypeScript Support** - Full type definitions
+- **Tree-shakeable** - Import only what you need
+
+## Installation
+
+```bash
+npm install tona-ui
+```
 
 ```bash
 pnpm add tona-ui
 ```
 
-## 组件
-
-### Button
-
-按钮组件，支持多种变体和尺寸。
-
-```tsx
-import { Button } from 'tona-ui'
-
-// 基础用法
-<Button>点击我</Button>
-
-// 不同变体
-<Button variant="destructive">删除</Button>
-<Button variant="outline">轮廓</Button>
-<Button variant="ghost">幽灵</Button>
-
-// 不同尺寸
-<Button size="sm">小按钮</Button>
-<Button size="lg">大按钮</Button>
-<Button size="icon">图标按钮</Button>
-
-// 作为子组件渲染
-<Button asChild>
-  <a href="/link">链接按钮</a>
-</Button>
+```bash
+yarn add tona-ui
 ```
+
+## Usage
+
+```typescript
+import { Slot, cn } from 'tona-ui'
+```
+
+## Components
 
 ### Slot
 
-Slot 组件用于将 props 传递给子组件，类似于 Radix UI 的 Slot 组件。
+The Slot component forwards props to its child element, similar to Radix UI's Slot.
 
 ```tsx
 import { Slot } from 'tona-ui'
 
-// 基础用法
+// Basic usage
 <Slot className="custom-class">
-  <button>按钮</button>
+  <button>Click me</button>
+</Slot>
+// Renders: <button class="custom-class">Click me</button>
+
+// Event handling
+<Slot onClick={() => console.log('clicked')}>
+  <div>Clickable div</div>
 </Slot>
 
-// 事件处理
-<Slot onClick={() => console.log('clicked')}>
-  <div>可点击的 div</div>
+// Multiple children - props forwarded to all
+<Slot className="item">
+  <span>Item 1</span>
+  <span>Item 2</span>
 </Slot>
 ```
 
 ### cn
 
-工具函数，用于合并 CSS 类名。
+Utility function for merging CSS class names.
 
 ```tsx
 import { cn } from 'tona-ui'
 
-const className = cn('base-class', 'conditional-class', {
-  'active-class': isActive
+// Basic usage
+const className = cn('base-class', 'conditional-class')
+// Result: "base-class conditional-class"
+
+// With conditions
+const className = cn('base-class', {
+  'active-class': isActive,
+  'disabled-class': isDisabled,
 })
+// Result when isActive=true, isDisabled=false: "base-class active-class"
+
+// Multiple arguments
+const className = cn('flex', 'items-center', isLarge && 'p-4', isSmall && 'p-2')
 ```
 
-## 开发
+## Peer Dependencies
+
+```json
+{
+  "preact": ">=10.0.0"
+}
+```
+
+## Development
 
 ```bash
-# 开发模式
+# Development mode
 pnpm dev
 
-# 构建
+# Build
 pnpm build
 ```
 
-## 许可证
+## Related
 
-MIT
+- [tona](https://github.com/guangzan/tona/tree/main/packages/core) - Core framework
+- [tona-hooks](https://github.com/guangzan/tona/tree/main/packages/hooks) - React hooks
+- [tona-sonner](https://github.com/guangzan/tona/tree/main/packages/sonner) - Toast notifications

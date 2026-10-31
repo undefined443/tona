@@ -1,0 +1,18 @@
+:root {
+  --post-bottomimage-image-height: 200px;
+}
+
+#custom-post-bottomimage {
+  width: 100%;
+  height: var(--post-bottomimage-image-height);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 767px) {
+  #custom-post-bottomimage {
+    height: 130px;
+  }
+}

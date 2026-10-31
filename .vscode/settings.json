@@ -20,6 +20,7 @@
     "biomejs",
     "bumpp",
     "buryit",
+    "changelogithub",
     "clsx",
     "cnblog",
     "cnblogs",
@@ -29,6 +30,9 @@
     "esbuild",
     "esno",
     "Followees",
+    "Gitee",
+    "haru",
+    "imagebox",
     "jquery",
     "Logined",
     "lucide",
@@ -40,12 +44,18 @@
     "photoview",
     "picocolors",
     "postarchive",
+    "postid",
     "Posttitle",
     "preact",
+    "qrcodes",
+    "reacg",
+    "rehype",
     "shadcn",
+    "shiki",
     "singlefile",
     "sonner",
     "taglist",
+    "taobao",
     "Tona",
     "trae",
     "tsdown",
@@ -55,5 +65,8 @@
     "vitest",
     "Wechat",
     "Weibo"
-  ]
+  ],
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

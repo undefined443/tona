@@ -1,0 +1,65 @@
+name: Publish Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    if: github.repository == 'guangzan/tona'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+
+      - name: Set node version from .node-version
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Build packages
+        run: pnpm build:pkg
+
+      - name: Build themes
+        run: |
+          pnpm --dir themes/geek build
+          pnpm --dir themes/reacg build
+          pnpm --dir themes/shadcn build
+          pnpm --dir themes/simple build
+          pnpm --dir themes/view build
+
+      - name: Package theme assets
+        run: |
+          zip -j geek.zip themes/geek/dist/geek.min.js themes/geek/dist/geek.min.css
+          zip -j reacg.zip themes/reacg/dist/reacg.min.js themes/reacg/dist/reacg.min.css
+          zip -j shadcn.zip themes/shadcn/dist/shadcn.min.js themes/shadcn/dist/shadcn.min.css
+          zip -j simple.zip themes/simple/dist/simple.min.js themes/simple/dist/simple.min.css
+          zip -j view.zip themes/view/dist/view.min.js themes/view/dist/view.min.css
+
+      - name: Publish to npm
+        run: npm i -g npm@^11.5.2 && pnpm run publish-ci ${{ github.ref_name }}
+
+      - name: Generate Changelog
+        run: npx changelogithub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload theme assets
+        run: gh release upload ${{ github.ref_name }} geek.zip reacg.zip shadcn.zip simple.zip view.zip --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

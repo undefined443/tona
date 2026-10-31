@@ -13,7 +13,7 @@ interface Lrc {
   type: 1 | 3
   color: string
 }
-interface Link {
+export interface Link {
   name: string
   link: string
 }
@@ -84,6 +84,14 @@ interface ImagePreviewOptions {
 }
 interface Live2dOptions {
   enable: boolean
+  page: Page
+  agent: 'pc' | 'phone' | 'all'
+  model: string
+  width: number
+  height: number
+  position: 'left' | 'right'
+  gap: string
+  mute: boolean
 }
 interface LockScreenOptions {
   enable: boolean
@@ -93,8 +101,7 @@ interface LockScreenOptions {
 interface DarkModeOptions {
   enable: boolean
   darkDefault: boolean
-  autoDark: boolean
-  autoLight: boolean
+  followSystem: boolean
 }
 interface MusicPlayerOptions {
   enable: boolean
@@ -163,6 +170,25 @@ interface WebsiteTagOptions {
 }
 interface CodeTrafficLightOptions {
   enable: boolean
+}
+interface AboutOptions {
+  enable: boolean
+  bio: string
+  tags: string[]
+}
+interface ItemGroupItem {
+  title: string
+  href: string
+  lightIcon: string
+  darkIcon?: string
+}
+interface ItemGroup {
+  group: string
+  items: ItemGroupItem[]
+}
+interface ItemGroupsOptions {
+  enable: boolean
+  groups: ItemGroup[]
 }
 type GenericGetFn<T> = (arg?: Partial<T>) => T
 /**
@@ -289,3 +315,11 @@ export type GetWebsiteTagOptions = GenericGetFn<WebsiteTagOptions>
  * 代码块红绿灯
  */
 export type GetCodeTrafficLightOptions = GenericGetFn<CodeTrafficLightOptions>
+/**
+ * 关于我配置
+ */
+export type GetAboutOptions = GenericGetFn<AboutOptions>
+/**
+ * 图标分组配置
+ */
+export type GetItemGroupsOptions = GenericGetFn<ItemGroupsOptions>

@@ -1,9 +1,12 @@
 {
-  "author": "guangzan",
+  "name": "tona-theme-geek",
+  "private": true,
   "license": "MIT",
+  "author": "guangzan",
+  "type": "module",
   "scripts": {
-    "dev": "vite --force",
-    "build": "vite build"
+    "dev": "vp dev",
+    "build": "vp build"
   },
   "dependencies": {
     "tona": "workspace:*",

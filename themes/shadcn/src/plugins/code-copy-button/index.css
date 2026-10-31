@@ -1,0 +1,41 @@
+@reference "../../styles/globals.css";
+
+.cnb-code-toolbar {
+  @apply hidden;
+}
+
+.code-block-wrapper {
+  @apply relative;
+}
+
+.code-copy-btn {
+  @apply absolute
+    top-2
+    right-2
+    z-10
+    size-7
+    inline-flex
+    items-center
+    justify-center
+    rounded-sm
+    text-sm
+    font-medium
+    transition-all
+    shrink-0
+    outline-none
+    bg-code
+    text-muted-foreground
+    focus-visible:border-ring
+    focus-visible:ring-ring/50
+    focus-visible:ring-[3px]
+    hover:bg-muted
+    hover:text-foreground;
+}
+
+.code-copy-btn svg {
+  @apply size-4;
+}
+
+.code-copy-btn.copied {
+  @apply text-green-500;
+}

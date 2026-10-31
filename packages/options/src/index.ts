@@ -1,5 +1,6 @@
 import { defineOptions } from 'tona'
 import type {
+  GetAboutOptions,
   GetBackgroundOptions,
   GetBarragesOptions,
   GetCatalogOptions,
@@ -16,8 +17,10 @@ import type {
   GetGiteeOptions,
   GetGithubOptions,
   GetImagePreviewOptions,
+  GetItemGroupsOptions,
   GetLicenseOptions,
   GetLinksOptions,
+  Link,
   GetLive2dOptions,
   GetLockScreenOptions,
   GetMusicPlayerOptions,
@@ -143,10 +146,27 @@ export const getEmojiOptions: GetEmojiOptions = defineOptions('emoji', {
   buttonIcon: '',
   emojiList: [],
 })
-export const getLinksOptions: GetLinksOptions = defineOptions('links', {
+/**
+ * 链接配置
+ * 兼容旧版 Array<Link> 格式，统一输出为 { enable, value }
+ */
+const baseGetLinksOptions = defineOptions('links', {
   enable: false,
   value: [],
 })
+export const getLinksOptions: GetLinksOptions = (devOptions) => {
+  const options = baseGetLinksOptions(devOptions)
+  const legacyEntries = Object.entries(options)
+    .filter(([key]) => !Number.isNaN(Number.parseInt(key, 10)))
+    .sort(([a], [b]) => Number(a) - Number(b))
+  if (!legacyEntries.length) {
+    return options
+  }
+  return {
+    enable: true,
+    value: legacyEntries.map(([, value]) => value as unknown as Link),
+  }
+}
 export const getImagePreviewOptions: GetImagePreviewOptions = defineOptions(
   ['imagePreview', 'imagebox'],
   {
@@ -162,6 +182,7 @@ export const getLive2dOptions: GetLive2dOptions = defineOptions('live2d', {
   height: 200,
   position: 'left',
   gap: 'default',
+  mute: false,
 })
 export const getLockScreenOptions: GetLockScreenOptions = defineOptions(
   'lock',
@@ -176,8 +197,7 @@ export const getDarkModeOptions: GetDarkModeOptions = defineOptions(
   {
     enable: false,
     darkDefault: false,
-    autoDark: false,
-    autoLight: false,
+    followSystem: false,
   },
 )
 export const getMusicPlayerOptions: GetMusicPlayerOptions = defineOptions(
@@ -272,10 +292,22 @@ export const getPostListImageOptions: GetPostListImageOptions = defineOptions(
   },
 )
 export const getWebsiteTagOptions: GetWebsiteTagOptions = defineOptions(
-  'webTag',
+  ['webTag', 'tab'],
   {
     enable: false,
     title: '',
     favicon: '',
+  },
+)
+export const getAboutOptions: GetAboutOptions = defineOptions('about', {
+  enable: false,
+  bio: '',
+  tags: [],
+})
+export const getItemGroupsOptions: GetItemGroupsOptions = defineOptions(
+  'itemGroups',
+  {
+    enable: false,
+    groups: [],
   },
 )

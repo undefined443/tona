@@ -1,47 +1,47 @@
 {
   "name": "tona-utils",
-  "version": "1.0.0",
-  "type": "module",
+  "version": "1.0.25",
   "description": "",
-  "author": {
-    "name": "guangzan",
-    "url": "https://www.cnblogs.com/guangzan",
-    "email": "guangzan1999@outlook.com"
-  },
-  "license": "MIT",
-  "homepage": "https://github.com/acnblogs/tona#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/acnblogs/tona.git"
-  },
-  "bugs": {
-    "url": "https://github.com/acnblogs/tona/issues"
-  },
   "keywords": [
     "博客园"
   ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
+  "homepage": "https://github.com/guangzan/tona/tree/main/packages/utils#readme",
+  "bugs": {
+    "url": "https://github.com/guangzan/tona/issues"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "license": "MIT",
+  "author": {
+    "name": "guangzan",
+    "email": "guangzan1999@outlook.com",
+    "url": "https://www.cnblogs.com/guangzan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guangzan/tona.git",
+    "directory": "packages/utils"
+  },
   "files": [
     "dist"
   ],
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
   "scripts": {
-    "dev": "tsdown --watch",
-    "build": "tsdown"
+    "dev": "vp pack --watch",
+    "build": "vp pack"
   },
   "devDependencies": {
     "@types/jquery": "catalog:",
     "@vitest/ui": "catalog:",
     "happy-dom": "catalog:",
-    "tsdown": "catalog:",
+    "vite-plus": "catalog:",
     "vitest": "catalog:"
   }
 }

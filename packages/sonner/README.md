@@ -1,22 +1,42 @@
 # tona-sonner
 
-Preact toast notification component inspired by sonner.
+<p align="center">
+  <img src="../../assets/tona.png" alt="Tona" width="100" />
+</p>
+
+<p align="center">
+  Preact toast notification component inspired by sonner.
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/tona-sonner"><img src="https://img.shields.io/npm/v/tona-sonner?style=flat-square" alt="npm version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/npm/l/tona-sonner?style=flat-square" alt="license"></a>
+  <a href="https://preactjs.com"><img src="https://img.shields.io/badge/Preact->=10.0.0-673AB8?style=flat-square&logo=preact" alt="Preact"></a>
+</p>
+
+**English** | [中文](./README.zh-CN.md)
 
 ## Features
 
-- 🎨 Beautiful and customizable toast notifications
-- 📱 Mobile-friendly responsive design
-- 🎯 Multiple toast types (success, error, warning, info)
-- ⚡ Lightweight and performant
-- 🎭 Smooth animations and transitions
-- 🔧 Highly configurable
-- 📦 TypeScript support
-- 🌙 Dark mode support
+- **Beautiful Design** - Clean and modern toast notifications
+- **Multiple Types** - Success, error, warning, info toasts
+- **Customizable** - Highly configurable appearance and behavior
+- **Dark Mode** - Built-in dark theme support
+- **Animations** - Smooth enter/exit animations
+- **TypeScript** - Full type definitions included
 
 ## Installation
 
 ```bash
 npm install tona-sonner
+```
+
+```bash
+pnpm add tona-sonner
+```
+
+```bash
+yarn add tona-sonner
 ```
 
 ## Usage
@@ -27,89 +47,81 @@ import { Toaster, toast } from 'tona-sonner'
 function App() {
   return (
     <div>
-      <button onClick={() => toast.default('Hello World!')}>
-        Show Toast
-      </button>
+      <button onClick={() => toast.success('Hello World!')}>Show Toast</button>
       <Toaster />
     </div>
   )
 }
 ```
 
-## API
-
-### toast()
-
-Create a toast notification.
+## Toast Types
 
 ```tsx
-// Different types
+// Different toast types
 toast.success('Success!')
 toast.error('Error!')
 toast.warning('Warning!')
 toast.info('Info!')
+toast.default('Default message')
+```
 
-// Toast with description
+## Toast with Options
+
+```tsx
+// With description
 toast.success('Success!', {
-  description: 'Your action was completed successfully.'
+  description: 'Your action was completed successfully.',
 })
 
-// Toast with action
+// With action
 toast.error('Error occurred', {
   description: 'Something went wrong',
   action: {
     label: 'Retry',
-    onClick: () => console.log('Retrying...')
-  }
+    onClick: () => console.log('Retrying...'),
+  },
 })
 
-// Dismiss a toast
-toast.dismiss(toastId)
+// Custom duration
+toast.info('This will close in 5 seconds', {
+  duration: 5000,
+})
 ```
 
-### Toaster
-
-The toast container component with fixed defaults:
-- Position: bottom-right
-- Gap: 14px
-- Visible toasts: 3
-- Duration: 3000ms
-- Always shows close button
-- Stacked by default, expands on hover
+## Toaster Component
 
 ```tsx
 <Toaster
-  className="custom-toaster"  // Custom CSS class
-  style={{ /* custom styles */ }}
-  icons={{
-    success: <SuccessIcon />,
-    error: <ErrorIcon />,
-    warning: <WarningIcon />,
-    info: <InfoIcon />,
-    close: <CloseIcon />,
-  }}
+  position="bottom-right" // Toast position
+  gap={14} // Gap between toasts
+  visibleToasts={3} // Max visible toasts
 />
 ```
 
-### Toast Types
+### Default Configuration
+
+- Position: `bottom-right`
+- Gap: `14px`
+- Visible toasts: `3`
+- Duration: `3000ms`
+- Close button: Always visible
+- Stacked by default, expands on hover
+
+## Dismissing Toasts
 
 ```tsx
-interface ToastT {
-  id: string | number
-  title?: string
-  description?: string
-  type?: 'success' | 'error' | 'warning' | 'info'
-  duration?: number
-  action?: {
-    label: string
-    onClick: () => void
-  }
-}
+const toastId = toast.success('Hello!')
+
+// Dismiss specific toast
+toast.dismiss(toastId)
+
+// Dismiss all toasts
+toast.dismiss()
 ```
 
 ## Auto-mounting
 
-The toaster will automatically mount to the document body when imported. You can also manually mount it:
+The Toaster automatically mounts to document body when imported. You can also manually mount it:
 
 ```tsx
 import { mountToaster } from 'tona-sonner'
@@ -124,14 +136,32 @@ mountToaster(container)
 
 ## Styling
 
-The component includes built-in styles that support:
-- Light and dark themes
-- Responsive design
-- Smooth animations
-- Custom positioning
+Import the CSS file:
 
-You can override styles using CSS custom properties or by targeting the component classes.
+```tsx
+import 'tona-sonner/dist/index.css'
+```
 
-## License
+Or customize with CSS variables:
 
-MIT
+```css
+:root {
+  --toast-background: #fff;
+  --toast-border: 1px solid #e5e5e5;
+  --toast-border-radius: 8px;
+}
+```
+
+## Peer Dependencies
+
+```json
+{
+  "preact": ">=10.0.0"
+}
+```
+
+## Related
+
+- [tona](https://github.com/guangzan/tona/tree/main/packages/core) - Core framework
+- [tona-ui](https://github.com/guangzan/tona/tree/main/packages/ui) - UI components
+- [sonner](https://sonner.emilkowal.ski/) - Original React version

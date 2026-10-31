@@ -58,6 +58,7 @@ export function useQueryDOM<T>({
     observer.observe(targetNode, {
       childList: true,
       subtree: true,
+      attributes: true,
       characterData: false,
     })
 

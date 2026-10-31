@@ -3,6 +3,7 @@ const CUSTOM_AT_RULES = [
   // Tailwind-specific at-rules
   'apply',
   'layer',
+  'plugin',
   'responsive',
   'reference',
   'utility',
@@ -62,6 +63,15 @@ export default {
     'import-notation': 'string',
     // Allow the `@apply` at rule as its part of Tailwind
     'at-rule-no-deprecated': [true, { ignoreAtRules: CUSTOM_AT_RULES }],
-    'tona-stylelint-one-utility-class-per-line': true,
+    'tona/one-utility-class-per-line': true,
+    'hue-degree-notation': null,
+    'lightness-notation': null,
+    'custom-property-empty-line-before': null,
+    'rule-empty-line-before': null,
+    'color-function-alias-notation': null,
+    'nesting-selector-no-missing-scoping-root': null,
+    'comment-empty-line-before': null,
+    'alpha-value-notation': null,
+    'color-function-notation': null,
   },
 }
